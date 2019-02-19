@@ -10,7 +10,7 @@ class User extends Authenticatable
 {
     use Notifiable;
     protected $dispatchesEvents = [
-        'saved' => UserCreated::class,
+        'retrieved' => UserCreated::class,
     ];
 
     protected $roles = [];
@@ -48,5 +48,14 @@ class User extends Authenticatable
     public function role($role = '')
     {
         return in_array($role, $this->roles);
+    }
+    public function hasChosenRole()
+    {
+        if (!empty($this->roles)) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

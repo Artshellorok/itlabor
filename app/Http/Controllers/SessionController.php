@@ -14,11 +14,11 @@ class SessionController extends Controller
     {
         $credentials = $request->only('login', 'password');
         if (auth()->attempt($credentials)) {
-            if (!empty(auth()->user()->roles)) {
-
+            if (auth()->user()->hasChosenRole()) {
+                return redirect('/dashboard');
             }
             else {
-                
+                return redirect('/profile');
             }
         }
         else {

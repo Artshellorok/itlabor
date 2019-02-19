@@ -24,17 +24,16 @@ class SetRoles
      * @param  UserCreated  $event
      * @return void
      */
-    public function handle(UserCreated $event, NameSpaceFinder $finder)
+    public function handle(UserCreated $event)
     {
-        foreach ($finder->getClassesOfNameSpace('App') as $class) {
-            if ($class instanceof App\Role) {
-                dd($class);
-                $roleName = mb_strtolower(get_class($class));
-                dd($roleName);
-                if ($event->user->$roleName()->exists()) {
-                    $event->user->new_role = $roleName;
-                }
-            }
+        if ($event->user->teacher()->exists()) {
+            $event->user->new_role = "teacher";
+        }
+        if ($event->user->student()->exists()) {
+            $event->user->new_role = "student";
+        }
+        if ($event->user->ancestor()->exists()) {
+            $event->user->new_role = "ancestor";
         }
     }
 }
