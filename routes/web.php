@@ -13,4 +13,4 @@
 Route::get('/login', 'SessionController@create');
 Route::post('/login', 'SessionController@store');
 Route::get('/profile', 'UserController@profileCreate');
-Route::get('/dashboard', 'ActionsController@index');
+Route::get('/dashboard', 'ActionsController@index')->middleware(['web', 'role']);
