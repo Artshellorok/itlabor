@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
-    protected $guarded = ['id', 'user_id', 'created_at'];
-    
-    public function user()
+    protected $guarded = [];
+    public $timestamps = [];
+    public function lessons()
     {
-        return $this->belongsTo('\App\User');
+        return $this->morphedByMany('App\Lesson', 'roleable');
     }
 }

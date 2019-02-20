@@ -2,7 +2,7 @@
 
 namespace App;
 
-class Ancestor extends Role
+class Ancestor extends Roles
 {
     
 }

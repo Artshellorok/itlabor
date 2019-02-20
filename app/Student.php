@@ -2,7 +2,7 @@
 
 namespace App;
 
-class Student extends Role
+class Student extends Roles
 {
     
 }
