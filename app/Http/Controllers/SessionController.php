@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 class SessionController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('guest')->except('destroy');
+    }
     public function create()
     {
         return view('login');
@@ -14,14 +18,12 @@ class SessionController extends Controller
     {
         $credentials = $request->only('login', 'password');
         if (auth()->attempt($credentials)) {
-            if (auth()->user()->hasChosenRole()) {
+            if (auth()->user()->role()) {
                 return redirect('/dashboard');
-            }
-            else {
+            } else {
                 return redirect('/profile');
             }
-        }
-        else {
+        } else {
             return back();
         }
     }

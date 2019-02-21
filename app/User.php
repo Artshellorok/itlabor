@@ -45,17 +45,16 @@ class User extends Authenticatable
         return $this->roles;
     }
     
-    public function hasRole($role = '')
+    public function role(...$roles)
     {
-        return in_array($role, $this->roles);
+        return empty($this->roles) ? false : !array_diff($roles, $this->roles);
     }
-    public function hasChosenRole()
+    public function roleOr(...$roles)
     {
-        if (!empty($this->roles)) {
-            return true;
-        }
-        else {
-            return false;
+        foreach ($roles as $role) {
+            if ($this->role($role)) {
+                return true;
+            }
         }
     }
 }

@@ -3,7 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Auth\SessionGuard;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -13,7 +14,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        SessionGuard::macro('role', function (...$values) {
+            return \Auth::user()->role(...$values);
+        });
+        SessionGuard::macro('roleOr', function (...$values) {
+            return \Auth::user()->roleOr(...$values);
+        });
+        Blade::if('role', function (...$roles) {
+            return auth()->role(...$roles);
+        });
     }
 
     /**

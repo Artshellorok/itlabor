@@ -13,16 +13,14 @@ class CheckRole
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $role ='')
+    public function handle($request, Closure $next, ...$roles)
     {
-        if (auth()->user()->hasChosenRole()) {
-            if ($role) {
-                if (!auth()->user()->hasRole($role)) {
-                    return abort('403');
-                }
+        if (auth()->user()->role()) {
+            if (!auth()->user()->role(...$roles)) {
+                return abort('403');
             }
         }
-        else {
+        else{
             return redirect('/profile');
         }
         return $next($request);

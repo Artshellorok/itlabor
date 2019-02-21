@@ -10655,3 +10655,7 @@ a.text-dark:focus {
   }
 }
 
+.navbar {
+  margin-bottom: 30px;
+}
+

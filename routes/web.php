@@ -10,7 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/login', 'SessionController@create');
+Route::get('/login', 'SessionController@create')->name('login');
 Route::post('/login', 'SessionController@store');
 Route::get('/profile', 'UserController@profileCreate');
-Route::get('/dashboard', 'ActionsController@index')->middleware(['web', 'role']);
+Route::get('/dashboard', 'ActionsController@index')->middleware(['auth:web', 'role:teacher']);
+Route::get('/lessons', 'LessonsController@index');
