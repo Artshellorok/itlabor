@@ -7,17 +7,12 @@
             </li>
             @role('teacher')
             <li class="nav-item">
-                <a class="nav-link" href="#">Просмотреть учеников</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Добавить урок</a>
+                <a class="nav-link" href="/lessons/create">Добавить урок</a>
             </li>
             @endrole
-            @role('student')
             <li class="nav-item">
-                <a class="nav-link" href="#">Просмотреть уроки</a>
+                <a class="nav-link" href="/lessons/">Просмотреть уроки</a>
             </li>
-            @endrole
             @role('ancestor')
             <li class="nav-item">
                 <a class="nav-link" href="#">Оплатить урок</a>

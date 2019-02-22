@@ -14,6 +14,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        
+        setlocale(LC_TIME, 'ru_RU.UTF-8');
+        \App::setLocale('ru');
+        \Carbon\Carbon::setLocale('ru_RU');
         SessionGuard::macro('role', function (...$values) {
             return \Auth::user()->role(...$values);
         });

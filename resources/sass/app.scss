@@ -1,4 +1,9 @@
 @import '~bootstrap/scss/bootstrap';
+@import "node_modules/font-awesome/scss/font-awesome.scss";
+@import '~pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css';
+.jumbotron{
+    background: #fff !important;
+}
 .navbar{
     margin-bottom: 30px;
 }

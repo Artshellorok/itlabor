@@ -11,4 +11,8 @@ class Lesson extends Model
     {
         return $this->morphToMany('App\Role', 'roleable');
     }
+    public function teacher()
+    {
+        return $this->belongsTo('App\Teacher');
+    }
 }

@@ -8,6 +8,9 @@
     <title>{{Request::path()}}</title>
 </head>
 <body>
+    <div id ='app'>
     @yield('content')
+    </div>
+    <script src='/js/app.js' type='text/javascript'></script>
 </body>
 </html>
