@@ -12,8 +12,9 @@
 */
 Route::get('/login', 'SessionController@create')->name('login');
 Route::post('/login', 'SessionController@store');
+Route::get('/logout', 'SessionController@destroy');
 Route::get('/profile', 'UserController@profileCreate');
-Route::get('/dashboard', 'ActionsController@index')->middleware(['auth:web', 'role:teacher']);  
+Route::get('/dashboard', 'ActionsController@index')->middleware(['auth:web', 'role']);  
 Route::prefix('lessons')->group(function () {
     Route::get('/', 'LessonsController@index');
     Route::get('create', 'LessonsController@create');

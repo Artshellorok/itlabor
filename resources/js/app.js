@@ -28,4 +28,5 @@ Vue.component('datetime-picker', require('./components/DatePicker.vue').default)
 
 const app = new Vue({
     el: '#app',
+    mixins: document.mixin ? [document.mixin] : false, 
 });

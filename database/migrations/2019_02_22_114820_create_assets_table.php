@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRoleablesTable extends Migration
+class CreateAssetsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateRoleablesTable extends Migration
      */
     public function up()
     {
-        Schema::create('roleables', function (Blueprint $table) {
-            $table->string('role_id');
-            $table->integer('roleable_id');
-            $table->string('roleable_type');
-            
-            $table->primary(['role_id', 'roleable_id', 'roleable_type']);
+        Schema::create('assets', function (Blueprint $table) {
+            $table->increments('id');
+            $table->text('content');
+            $table->integer('lesson_id')->unsigned();
+            $table->foreign('lesson_id')->references('id')->on('lessons');
         });
     }
 
@@ -29,6 +28,6 @@ class CreateRoleablesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('roleables');
+        Schema::dropIfExists('assets');
     }
 }

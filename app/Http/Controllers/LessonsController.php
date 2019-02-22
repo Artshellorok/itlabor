@@ -27,10 +27,12 @@ class LessonsController extends Controller
     }
     public function create()
     {
-        return view('lessons.create');
+        $roles = \App\Role::all();
+        return view('lessons.create', compact('roles'));
     }
     public function store(Request $request)
     {
+        
         auth()->user()->teacher->lessons()->create(
             [
                 'name' => $request->name,

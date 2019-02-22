@@ -67985,7 +67985,8 @@ Vue.component('datetime-picker', __webpack_require__(/*! ./components/DatePicker
  */
 
 var app = new Vue({
-  el: '#app'
+  el: '#app',
+  mixins: document.mixin ? [document.mixin] : false
 });
 
 /***/ }),

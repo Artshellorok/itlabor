@@ -6,7 +6,7 @@
         <h1 class="display-4">{{$lesson->name}}</h1>
         <p class="lead">{{$lesson->description}}</p>
         <hr class="my-4">
-        <p>Урок будет проведен: {{\Carbon\Carbon::parse($lesson->date)->format('d F Y')}}</p>
+        <p>Урок будет проведен: {{\Carbon\Carbon::parse($lesson->date)->format('d F Y')}}. Учитель заработал: {{$lesson->teacher->earned}} рублей</p>
         <p class="lead">
           <a class="btn btn-primary btn-lg" href="#" role="button">Записаться</a>
         </p>

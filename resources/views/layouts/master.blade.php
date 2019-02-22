@@ -11,6 +11,7 @@
     <div id ='app'>
     @yield('content')
     </div>
+    @yield('scripts')
     <script src='/js/app.js' type='text/javascript'></script>
 </body>
 </html>

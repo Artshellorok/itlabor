@@ -17,11 +17,38 @@
                         <label for="date">Выберите дату проведения урока</label>
                         <datetime-picker name="date" class="form-control form-control-lg" placeholder="Описание" id='date'></datetime-picker>
                     </div>
-
-                    <button type="submit" class="btn btn-primary">Создать урок</button>
+                    @include('lessons.cards.programs')
+                    @include('lessons.cards.links')
+                    <button type="submit" class="btn btn-primary" >Создать урок</button>
                     @csrf
                 </form>
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+<script type='text/javascript'>
+    document.mixin = {
+        data: {
+            programs: [{}],
+            links: [{}],
+        },
+        methods: {
+            delProgram(count){
+                console.log(count, this.programs);
+                this.programs.splice(count, 1);
+                console.log(this.programs);
+            },
+            addProgram(){
+                this.programs.push({});
+            },
+            addLink(){
+                this.links.push({});
+            },
+            delLink(count){
+                this.links.splice(count, 1);
+            },
+        }
+    }
+</script>
 @endsection
