@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\Lesson;
+use \App\Http\Requests\CreateLessonRequest;
 class LessonsController extends Controller
 {
     function __construct()
@@ -13,13 +14,8 @@ class LessonsController extends Controller
     }
     public function index()
     {
-        if (auth()->roleOr('teacher', 'student')) {
-            $lessons = Lesson::latest()->get();
-        }
-        if (auth()->role('ancestor')) {
-            $paid = Lesson::all();
-        }
-        return view('lessons.index', compact('lessons', 'paid'));
+        $lessons = Lesson::latest()->get();
+        return view('lessons.index', compact('lessons'));
     }
     public function show(Lesson $lesson)
     {
@@ -30,17 +26,9 @@ class LessonsController extends Controller
         $roles = \App\Role::all();
         return view('lessons.create', compact('roles'));
     }
-    public function store(Request $request)
+    public function store(CreateLessonRequest $request)
     {
-        
-        auth()->user()->teacher->lessons()->create(
-            [
-                'name' => $request->name,
-                'description' => $request->description,
-                'date' => $request->date,
-            ]
-        );
-
+        $request->persist();
         return redirect('/lessons');
     }
 }

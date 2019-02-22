@@ -1,4 +1,10 @@
 @extends('layouts.master')
+<style>
+    a{
+        color:#fff !important;
+        cursor:pointer;
+    }
+</style>
 @section('content')
     @include('header')
     <div class="container">
@@ -19,6 +25,7 @@
                     </div>
                     @include('lessons.cards.programs')
                     @include('lessons.cards.links')
+                    @include('lessons.cards.assets')
                     <button type="submit" class="btn btn-primary" >Создать урок</button>
                     @csrf
                 </form>
@@ -32,12 +39,11 @@
         data: {
             programs: [{}],
             links: [{}],
+            assets: [{}],
         },
         methods: {
             delProgram(count){
-                console.log(count, this.programs);
                 this.programs.splice(count, 1);
-                console.log(this.programs);
             },
             addProgram(){
                 this.programs.push({});
@@ -47,6 +53,12 @@
             },
             delLink(count){
                 this.links.splice(count, 1);
+            },
+            addAsset(){
+                this.assets.push({});
+            },
+            delAsset(count){
+                this.assets.splice(count, 1);
             },
         }
     }
