@@ -4,6 +4,10 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\CardValid;
+use App\Asset;
+use App\Program;
+use App\Video;
+use App\Role;
 class CreateLessonRequest extends FormRequest
 {
     /**
@@ -15,15 +19,38 @@ class CreateLessonRequest extends FormRequest
     {
         return true;
     }
+    protected $roles = [];
+    public function __construct()
+    {
+        $this->roles = Role::all();
+    }
+    protected function getRoles($list)
+    {
+        $roles =[];
+        foreach ($this->roles as $role) {
+            if (array_key_exists($role->role, $list)) {
+                if ($list[$role->role] == "on") {
+                    array_push($roles, $role->role);
+                } 
+            } 
+        }
+        return $roles;
+    }
     public function persist()
     {
-        auth()->user()->teacher->lessons()->create(
+        $lesson = auth()->user()->teacher->lessons()->create(
             [
-                'name' => $request->name,
-                'description' => $request->description,
-                'date' => $request->date,
+                'name' => request()->name,
+                'description' => request()->description,
+                'date' => request()->date,
             ]
         );
+        foreach (request()->assets as $assetarr) {
+            $asset = $lesson->assets()->create([
+                'content' => $assetarr['asset'],
+            ]);
+            $asset->roles()->create($this->getRoles($assetarr));
+        } 
     }
     /**
      * Get the validation rules that apply to the request.
@@ -36,7 +63,9 @@ class CreateLessonRequest extends FormRequest
             'name' => 'required',
             'description' => 'required',
             'date' => 'required|date',
-            'assets' => new CardValid
+            'assets' => new CardValid,
+            'programs' => new CardValid,
+            'link' => new CardValid,
         ];
     }
 }

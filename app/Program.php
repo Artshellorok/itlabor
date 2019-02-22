@@ -2,12 +2,7 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Program extends Model
+class Program extends LessonMaterial
 {
-    public function roles()
-    {
-        return $this->morphToMany('App\Role', 'roleable');
-    }
+    
 }

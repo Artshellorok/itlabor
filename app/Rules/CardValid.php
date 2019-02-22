@@ -3,7 +3,7 @@
 namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
-
+use \App\Role;
 class CardValid implements Rule
 {
     /**
@@ -11,9 +11,10 @@ class CardValid implements Rule
      *
      * @return void
      */
+    protected $roles = [];
     public function __construct()
     {
-        //
+        $this->roles = Role::all();
     }
 
     /**
@@ -27,11 +28,16 @@ class CardValid implements Rule
     {
         foreach ($cards as $card) {
             if ($card[str_singular($attribute)]) {
-                
-            } else{ 
-                return false;
+                foreach ($this->roles as $role) {
+                    if (array_key_exists($role->role, $card)) {
+                        if ($card[$role->role] == "on") {
+                            return true;
+                        } 
+                    } 
+                }
             }
         }
+        return false;
     }
 
     /**
