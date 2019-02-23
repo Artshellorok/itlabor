@@ -15,11 +15,21 @@ class LessonsController extends Controller
     public function index()
     {
         $lessons = Lesson::latest()->get();
-        return view('lessons.index', compact('lessons'));
+        return view('lessons.index', compact('lessons', 'materials'));
     }
     public function show(Lesson $lesson)
     {
-        return view('lessons.show')->with('lesson', $lesson);
+        $materials = ['assets', 'programs', 'videos'];
+        $viewables = collect([]);
+        foreach ($materials as $material) {
+            foreach ($lesson->$material as $materialC) {
+                if
+            }
+            if (auth()->roleOr(...$lesson->$material->roles())) {
+                $viewables->push($lesson->$material);
+            }
+        }
+        return view('lessons.show', compact('lesson', 'viewables'));
     }
     public function create()
     {

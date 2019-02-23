@@ -45,12 +45,15 @@ class CreateLessonRequest extends FormRequest
                 'date' => request()->date,
             ]
         );
-        foreach (request()->assets as $assetarr) {
-            $asset = $lesson->assets()->create([
-                'content' => $assetarr['asset'],
-            ]);
-            $asset->roles()->create($this->getRoles($assetarr));
-        } 
+        $materials = ['assets', 'videos', 'programs'];
+        foreach ($materials as $material) {
+            foreach(request()->$material as $arr) {
+                $m_instance = $lesson->$material()->create([
+                    'content' => $arr[str_singular($material)],
+                ]);
+                $m_instance->roles()->attach($this->getRoles($arr));
+            }
+        }
     }
     /**
      * Get the validation rules that apply to the request.
@@ -65,7 +68,7 @@ class CreateLessonRequest extends FormRequest
             'date' => 'required|date',
             'assets' => new CardValid,
             'programs' => new CardValid,
-            'link' => new CardValid,
+            'videos' => new CardValid,
         ];
     }
 }

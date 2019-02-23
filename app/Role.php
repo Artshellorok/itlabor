@@ -8,6 +8,7 @@ class Role extends Model
 {
     protected $guarded = [];
     public $timestamps = [];
+    protected $primaryKey = 'role';
     public function assets()
     {
         return $this->morphedByMany('App\Asset', 'roleable');

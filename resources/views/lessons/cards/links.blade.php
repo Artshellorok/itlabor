@@ -4,7 +4,7 @@
     </div>
     <div class="card-body" v-for='(link, count) in links'>
 
-        <input v-model="link.link" :name="`links[${count}][link]`" 
+        <input v-model="link.link" :name="`videos[${count}][video]`" 
         type="text" class="form-control form-control-lg" id="description" placeholder="Описание">
 
         @foreach($roles as $role)
@@ -13,7 +13,7 @@
               <div class="input-group-text">
 
                 <input type="checkbox" aria-label="Checkbox for following text input"
-                v-model="link['{{$role->role}}']" :name="`links[${count}][{{$role->role}}]`">
+                v-model="link['{{$role->role}}']" :name="`videos[${count}][{{$role->role}}]`">
 
               </div>
             </div>
