@@ -13,11 +13,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="/lessons/">Просмотреть уроки</a>
             </li>
-            @role('ancestor')
-            <li class="nav-item">
-                <a class="nav-link" href="#">Оплатить уроки</a>
-            </li>
-            @endrole
             <li class="nav-item">
                 <a class="nav-link" href="/logout">Выйти</a>
             </li>

@@ -20,11 +20,15 @@ class LessonsController extends Controller
     public function show(Lesson $lesson)
     {
         $lesson_materials = ['assets', 'programs', 'videos'];
-        $viewables = collect([]);
+        $viewables = collect();
         foreach ($lesson_materials as $lesson_material) {
             foreach ($lesson->$lesson_material as $material) {
-                if (auth()->roleOr(...$material->roles->pluck('role'))) {
+                if ($lesson->teacher->id == auth()->user()->id) {
                     $viewables->push($material);
+                } else{
+                    if (auth()->roleOr(...$material->roles->pluck('role'))) {
+                        $viewables->push($material);
+                    }
                 }
             }
         }

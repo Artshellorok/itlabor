@@ -7,7 +7,9 @@
         <p class="lead">{{$lesson->description}}</p>
         <hr class="my-4">
         <p>Урок будет проведен: {{\Carbon\Carbon::parse($lesson->date)->format('d F Y')}}. Учитель: {{$lesson->teacher->user->name}}</p>
+        
         @foreach ($viewables as $viewable)
+            <div>
             {{$viewable->content}} - 
             @switch(get_class($viewable))
                 @case('App\Asset')
@@ -19,6 +21,7 @@
                 @case('App\Program')
                     Программа урока
             @endswitch
+            </div>
         @endforeach
     </div>
 </div>
