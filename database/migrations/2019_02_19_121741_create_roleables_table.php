@@ -14,11 +14,11 @@ class CreateRoleablesTable extends Migration
     public function up()
     {
         Schema::create('roleables', function (Blueprint $table) {
-            $table->string('role_id');
+            $table->string('role_role');
             $table->integer('roleable_id');
             $table->string('roleable_type');
             
-            $table->primary(['role_id', 'roleable_id', 'roleable_type']);
+            $table->primary(['role_role', 'roleable_id', 'roleable_type']);
         });
     }
 
